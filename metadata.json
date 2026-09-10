@@ -1,0 +1,11 @@
+{
+  "name": "SAHAY-X: Multimodal Accessibility AI",
+  "description": "Situation-Aware Multimodal AI for Personalized, Risk-Aware Accessibility (AARE) featuring real-time Vision, Speech, Gesture, Smart OCR, and Adaptive Modality Selection.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
