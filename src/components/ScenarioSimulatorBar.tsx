@@ -57,6 +57,17 @@ export const SCENARIO_PRESETS: ScenarioPreset[] = [
     noiseLevel: 'quiet',
   },
   {
+    id: 'railway-station-exit',
+    title: 'Coimbatore Station Exit Wayfinding',
+    category: 'wayfinding',
+    icon: '🚉',
+    description: 'Overhead green Exit sign pointing left (← EXIT), train on right track, tactile corridor',
+    textQuery: 'Where is the exit and what direction should I walk?',
+    environment: 'transit',
+    noiseLevel: 'noisy',
+    simulatedFrame: '/samples/railway_station_exit.png',
+  },
+  {
     id: 'emergency-exit',
     title: 'Emergency Exit Wayfinding',
     category: 'wayfinding',
@@ -96,7 +107,7 @@ export const ScenarioSimulatorBar: React.FC<ScenarioSimulatorBarProps> = ({
         </span>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2.5">
         {SCENARIO_PRESETS.map((p) => (
           <button
             key={p.id}

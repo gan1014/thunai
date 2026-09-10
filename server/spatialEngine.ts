@@ -26,7 +26,7 @@ const DEFAULT_CONFIG: SpatialConfig = {
     obstacle: 0.8, wall: 2.0, window: 1.2, elevator: 2.2, ramp: 1.5,
     handrail: 1.0, crosswalk: 0.15, auto_rickshaw: 1.5, pothole: 0.3,
     tactile_paving: 0.1, metro_platform_edge: 0.15, cow_animal: 1.2,
-    currency_note: 0.15, medicine_strip: 0.1, speed_breaker: 0.1,
+    currency_note: 0.15, medicine_strip: 0.1, speed_breaker: 0.1, train: 3.5,
   },
 };
 
