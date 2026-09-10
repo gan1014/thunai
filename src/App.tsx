@@ -15,9 +15,6 @@ import { SmartOCR } from './pages/SmartOCR';
 import { Benchmark } from './pages/Benchmark';
 import { DashboardView } from './pages/DashboardView';
 import { ProfileView } from './pages/ProfileView';
-import { HackathonPitch } from './pages/HackathonPitch';
-import { ResearchFigures } from './pages/ResearchFigures';
-import { PresentationDeck } from './pages/PresentationDeck';
 
 import { VoiceInteractionProvider } from './context/VoiceInteractionContext';
 
@@ -26,12 +23,6 @@ export function App() {
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'slides':
-        return <PresentationDeck />;
-      case 'hackathon':
-        return <HackathonPitch />;
-      case 'figures':
-        return <ResearchFigures />;
       case 'home':
         return <Home onNavigate={setActiveTab} />;
       case 'assistant':

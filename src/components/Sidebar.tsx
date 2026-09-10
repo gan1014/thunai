@@ -17,9 +17,6 @@ import {
 } from 'lucide-react';
 
 export type NavTab =
-  | 'slides'
-  | 'hackathon'
-  | 'figures'
   | 'home'
   | 'assistant'
   | 'voice'
@@ -48,9 +45,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const { t } = useTranslation();
 
   const NAV_ITEMS: Array<{ id: NavTab; label: string; icon: any; badge?: string }> = [
-    { id: 'slides', label: `📊 ${t('nav.slides', 'Jury PPT Deck')}`, icon: Presentation, badge: '12 Slides' },
-    { id: 'hackathon', label: `🏆 ${t('nav.pitch', 'Hackathon Pitch')}`, icon: Trophy, badge: '1st Place' },
-    { id: 'figures', label: `📄 ${t('nav.figures', 'Research Figures')}`, icon: FileText, badge: '8 Figures' },
     { id: 'home', label: t('nav.home', 'Home'), icon: Home },
     { id: 'assistant', label: t('nav.assistant', 'Full Assistant'), icon: Bot, badge: 'Unified' },
     { id: 'voice', label: `🗣️ ${t('nav.voice', 'Voice Assistant')}`, icon: MessageCircle, badge: 'Gemini' },
@@ -99,15 +93,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                     isActive
-                      ? item.id === 'slides'
-                        ? 'bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white font-black shadow-lg shadow-indigo-600/30 ring-1 ring-white/30'
-                        : item.id === 'hackathon'
-                        ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-black shadow-lg shadow-amber-500/30'
-                        : 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
-                      : item.id === 'slides'
-                      ? 'text-indigo-300 bg-indigo-950/30 border border-indigo-500/40 hover:bg-indigo-950/60'
-                      : item.id === 'hackathon'
-                      ? 'text-amber-300 bg-amber-950/30 border border-amber-500/40 hover:bg-amber-950/60'
+                      ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
                       : 'text-slate-400 hover:text-slate-100 hover:bg-slate-900'
                   }`}
                 >

@@ -15,7 +15,6 @@ import {
   Cpu,
   Layers,
   AlertTriangle,
-  Trophy,
 } from 'lucide-react';
 import { NavTab } from '../components/Sidebar';
 
@@ -54,18 +53,18 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <button
               type="button"
-              onClick={() => onNavigate('pitch')}
-              className="px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm rounded-xl shadow-lg shadow-amber-500/25 flex items-center gap-2 transition-all cursor-pointer"
-            >
-              <Trophy className="w-4 h-4 text-slate-950" /> 🏆 {t('nav.pitch')}
-            </button>
-
-            <button
-              type="button"
               onClick={() => onNavigate('assistant')}
               className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm rounded-xl shadow-lg shadow-blue-600/30 flex items-center gap-2 transition-all cursor-pointer"
             >
               <Bot className="w-4 h-4" /> {t('nav.assistant')} <ArrowRight className="w-4 h-4" />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => onNavigate('vision')}
+              className="px-5 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-sm rounded-xl border border-slate-700 transition-all cursor-pointer flex items-center gap-2"
+            >
+              <Eye className="w-4 h-4 text-blue-400" /> {t('vision.title')}
             </button>
 
             <button

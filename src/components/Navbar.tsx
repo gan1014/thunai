@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Shield, User, Globe, Eye, Menu, X, Volume2, ShieldAlert, Keyboard, Trophy, FileText, Presentation, Mic } from 'lucide-react';
+import { Shield, User, Globe, Eye, Menu, X, Volume2, ShieldAlert, Keyboard, Mic } from 'lucide-react';
 import { useProfile } from '../context/ProfileContext';
 import { useAssistant } from '../context/AssistantContext';
 import { SUPPORTED_LANGUAGES, changeAppLanguage, SupportedLanguage } from '../i18n';
@@ -107,35 +107,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Right: Quick Action Controls & Emergency SOS */}
         <div className="flex items-center gap-1.5 sm:gap-2.5">
-          {/* Winning Jury PPT Deck Button */}
-          <button
-            type="button"
-            onClick={() => onTabChange && onTabChange('slides')}
-            aria-label={t('header.juryPresentation', 'Open Jury PPT Slide Presentation Deck')}
-            className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl font-black text-xs shadow-md transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400 ${
-              activeTab === 'slides'
-                ? 'bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white shadow-indigo-600/30 ring-1 ring-white/30'
-                : 'bg-indigo-950/60 hover:bg-indigo-900/80 text-indigo-200 border border-indigo-500/40'
-            }`}
-            title="Open Winning Jury PPT Presentation Deck"
-          >
-            <Presentation className="w-3.5 h-3.5 text-indigo-300" aria-hidden="true" />
-            <span className="hidden sm:inline">📊 {t('header.juryPresentation', 'Jury PPT')}</span>
-            <span className="sm:hidden">📊</span>
-          </button>
-
-          {/* Hackathon Grand Winner Pitch Button */}
-          <button
-            type="button"
-            onClick={() => onTabChange && onTabChange('hackathon')}
-            aria-label={t('header.pitchDeck', 'Open Hackathon Grand Winner Pitch')}
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs shadow-md shadow-amber-500/20 transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400"
-            title="Open Hackathon Grand Winner Pitch & Jury Defense"
-          >
-            <Trophy className="w-3.5 h-3.5 text-slate-950" aria-hidden="true" />
-            <span>🏆 {t('header.pitchDeck', 'Pitch')}</span>
-          </button>
-
           {/* 1-Click Find Exit / Voice Spatial Assistant Button */}
           <button
             type="button"
