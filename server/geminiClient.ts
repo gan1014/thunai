@@ -1,7 +1,4 @@
-/**
- * Gemini API Client for THUNAI.
- * Primary AI provider with timeout, retry, and error classification.
- */
+import { parseDataUri } from './mediaUtils.ts';
 
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models';
 
@@ -30,10 +27,10 @@ export interface GeminiError {
 const DEFAULT_CONFIG: GeminiConfig = {
   apiKey: '',
   model: 'gemini-1.5-flash',
-  timeoutMs: 3000,
+  timeoutMs: 8000,
   maxRetries: 0,
-  temperature: 0.4,
-  maxOutputTokens: 256,
+  temperature: 0.2,
+  maxOutputTokens: 1024,
 };
 
 export function hasGeminiKey(): boolean {
@@ -75,7 +72,8 @@ async function callGeminiAPI(
   prompt: string,
   systemInstruction: string,
   config: GeminiConfig,
-  history?: Array<{ role: string; parts: string }>
+  history?: Array<{ role: string; parts: string }>,
+  imageBase64?: string
 ): Promise<GeminiResult> {
   const start = Date.now();
 
@@ -90,7 +88,20 @@ async function callGeminiAPI(
     }
   }
 
-  contents.push({ role: 'user', parts: [{ text: prompt }] });
+  const userParts: any[] = [];
+  if (imageBase64) {
+    const { mimeType, base64Data } = parseDataUri(imageBase64, 'image/jpeg');
+    if (base64Data) {
+      userParts.push({
+        inlineData: {
+          mimeType: mimeType || 'image/jpeg',
+          data: base64Data,
+        },
+      });
+    }
+  }
+  userParts.push({ text: prompt });
+  contents.push({ role: 'user', parts: userParts });
 
   const body = {
     contents,
@@ -141,7 +152,7 @@ async function callGeminiAPI(
 export async function geminiChat(
   prompt: string,
   systemInstruction: string,
-  options: { timeoutMs?: number; history?: Array<{ role: string; parts: string }> } = {}
+  options: { timeoutMs?: number; history?: Array<{ role: string; parts: string }>; imageBase64?: string } = {}
 ): Promise<GeminiResult> {
   const config = getGeminiConfig();
   if (!config.apiKey) {
@@ -158,7 +169,7 @@ export async function geminiChat(
 
   for (let attempt = 0; attempt <= config.maxRetries; attempt++) {
     try {
-      return await callGeminiAPI(prompt, systemInstruction, config, options.history);
+      return await callGeminiAPI(prompt, systemInstruction, config, options.history, options.imageBase64);
     } catch (error: unknown) {
       lastError = error;
       const classified = classifyGeminiError(error);
@@ -175,6 +186,18 @@ export async function geminiChat(
   }
 
   throw lastError;
+}
+
+export async function geminiVision(
+  prompt: string,
+  systemInstruction: string,
+  imageBase64: string,
+  options: { timeoutMs?: number; temperature?: number } = {}
+): Promise<GeminiResult> {
+  const config = getGeminiConfig();
+  if (options.timeoutMs) config.timeoutMs = options.timeoutMs;
+  if (options.temperature !== undefined) config.temperature = options.temperature;
+  return geminiChat(prompt, systemInstruction, { timeoutMs: config.timeoutMs, imageBase64 });
 }
 
 export function extractGeminiError(error: unknown): GeminiError {

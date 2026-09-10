@@ -210,7 +210,7 @@ app.post('/api/ocr/smart', async (req, res) => {
     const { image_base64 } = req.body;
     const ocr = await ocrEngine.extractText(image_base64);
     const objects = await visionEngine.detectObjects(image_base64);
-    const context = ocrEngine.contextualize(ocr.raw_text, objects);
+    const context = ocrEngine.contextualize(ocr.raw_text, objects, ocr.context);
     res.json({
       raw_text: ocr.raw_text,
       blocks: ocr.blocks,
